@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#111827" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="PolskiLab" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="description" content="PolskiLab — a local-first Polish learning companion." />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAADlUlEQVR4nO3dTW7TUBiGURcxRqIjugK6Afa/ADbQHXTWQTcAg0iWIHkrNb7/PmcIrWXpPvezlTjpw/cfPze45UvvE2Bc4iASB5E4iMRBJA4icRCJg0gcROIgEgeROIjEQSQOInEQiYNIHETiIBIHkTiIxEEkDiJxEImDSBxE4iASB5E4iMRBJA4icRCJg0gcROIgEgfR194n8I+315c7fuvx6bnsAe/2wZnM6GGcL4w7spD/rUrjJq6tUckocRxfzsen5+5NXJu6kiHiGHBRC5q3Dzek1b29vkxavzgambEPcbQzXR/iaGquPsTR2kR9iKODWfoQB5E4+phieIijm/H7EAeROIjGesu+qoLvcZS6Iry9voz8zssp4ii+AJcDjn/TcND6l5V6W3PkTV/Eym/ZN1u8g+c/bGTrTw7utmwcLbfjsFv/oDXjaL9aS/axZhwUsWAcvTbxesNjwTgoRRxE4iASB5E4iMRBJA4icRCJg0gcRAvG0esBrfUeDFswDkpZM472m3i9sbGtGsfWdrWWLGNbOA6OW/mjCZcNXfUxiyLfc1fkTGpYf3LUm/mrXk12K0+OXfERsnwWF6eI42LAFR35mrKd4bLC3cRBJI5uBr+mbOLoZfwyNnHwAXF0MMXY2MTR3ixlbOJobKIyNnG0NFcZmziama6M7VQvn/cyYxYXJkdd85axLTY59pXo/h7b1E3slopj16uSNZrYrRnHbrHVasw9B5E4iMRBJA4icRCJg0gcROIgEgeROIjEQSQOInEQiYNIHETiIBIHkTiIxEEkDiJxEImDSBxE4iASB5E4iMRBtPhnZWf0+9uf63/89f7Q/kzEMYqbTVz/b8tKxNHfx1nc/OE2ibjn6OxTZRz8rc8yObo5uMANRojJ0UeprV91hIiDSBwdlN3u9YaHOFqrsZaV+hAHkTiaqncJqHFkcRCJg0gc7dR+WbP48cVBJA4icRCJg0gcROIgEkc7tR/fKn78IeIo8idz/N2d4oaIYzu8tMqoYZQ4tgMLPFEZ9a4sNY481jOkEy3zGQw0OU6ixhavNJDE0UHZtax3qRIHkTj6KLXdq752MtYN6alc1vXuhzAafCLS5OjsvjVu81lZk6O/T40Qn7I/o33VfT8HUZcObnLPQSQOInEQiYNIHETiIBIHkTiIxEEkDiJxEImDSBxE4iASB5E4iMRBJA4icRCJg0gcROIgEgeROIjEQfQX/j+1gJa0r7gAAAAASUVORK5CYII=" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23111827'/%3E%3Ctext x='50' y='64' text-anchor='middle' font-size='48' font-family='Arial' fill='white'%3EPL%3C/text%3E%3C/svg%3E" />
+  <title>PolskiLab</title>
+  <style>
+:root{
+  --bg:#f5f4ef;--panel:#ffffff;--panel2:#eeeee8;--text:#15171a;--muted:#6f747b;--line:#deded7;
+  --accent:#c62828;--accent2:#8e1d1d;--good:#1d7a4d;--warn:#a86408;--shadow:0 12px 35px rgba(20,20,20,.07);
+  font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111315;--panel:#191c1f;--panel2:#222629;--text:#f5f4ef;--muted:#a4a9af;--line:#30353a;--accent:#ef5350;--accent2:#ff7673;--good:#69c795;--warn:#e5a84b;--shadow:none}}
+:root[data-theme="dark"]{--bg:#111315;--panel:#191c1f;--panel2:#222629;--text:#f5f4ef;--muted:#a4a9af;--line:#30353a;--accent:#ef5350;--accent2:#ff7673;--good:#69c795;--warn:#e5a84b;--shadow:none}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text)}button,input,textarea,select{font:inherit}button{cursor:pointer}.app{min-height:100vh}.topbar{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(14px);position:sticky;top:0;z-index:20}.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.03em}.brand-mark{width:30px;height:30px;border-radius:9px;background:linear-gradient(145deg,var(--accent),#ffffff);box-shadow:inset 0 0 0 1px rgba(0,0,0,.12)}.top-actions{display:flex;gap:8px}.icon-btn,.btn,.seg button,.rating button{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:12px;padding:10px 13px}.btn.primary{background:var(--accent);color:white;border-color:var(--accent)}.btn.ghost{background:transparent}.layout{display:grid;grid-template-columns:220px minmax(0,1fr);max-width:1280px;margin:0 auto}.sidebar{padding:24px 14px;position:sticky;top:64px;height:calc(100vh - 64px);border-right:1px solid var(--line)}.nav{display:grid;gap:5px}.nav button{border:0;background:transparent;color:var(--muted);text-align:left;padding:11px 12px;border-radius:10px}.nav button.active,.nav button:hover{background:var(--panel2);color:var(--text)}.main{padding:32px;min-width:0}.eyebrow{color:var(--accent);text-transform:uppercase;font-weight:750;font-size:.75rem;letter-spacing:.1em}.hero h1{font-size:clamp(2rem,5vw,3.5rem);letter-spacing:-.055em;line-height:1;margin:.35rem 0 .7rem}.hero p{color:var(--muted);max-width:700px;line-height:1.55}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;margin-top:24px}.card{grid-column:span 4;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow)}.card.wide{grid-column:span 8}.card.full{grid-column:1/-1}.card h2,.card h3{margin:.1rem 0 .6rem;letter-spacing:-.025em}.metric{font-size:2rem;font-weight:800;letter-spacing:-.04em}.muted{color:var(--muted)}.small{font-size:.86rem}.pill{display:inline-flex;border-radius:999px;padding:5px 9px;background:var(--panel2);color:var(--muted);font-size:.78rem}.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.space{justify-content:space-between}.stack{display:grid;gap:12px}.field{display:grid;gap:6px}.field label{font-size:.84rem;color:var(--muted)}input,textarea,select{width:100%;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:11px;padding:11px 12px;outline:none}input:focus,textarea:focus,select:focus{border-color:var(--accent)}textarea{min-height:110px;resize:vertical}.progress{height:8px;border-radius:99px;background:var(--panel2);overflow:hidden}.progress>span{display:block;height:100%;background:var(--accent)}.list{display:grid;gap:8px}.list-item{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--bg)}.exercise{max-width:760px;margin:18px auto}.prompt{font-size:1.35rem;line-height:1.45;margin:18px 0}.feedback{padding:12px;border-radius:12px;background:var(--panel2);line-height:1.5}.feedback.good{border-left:4px solid var(--good)}.feedback.bad{border-left:4px solid var(--accent)}.seg{display:flex;gap:6px;flex-wrap:wrap}.seg button.active{background:var(--text);color:var(--bg)}.rating{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.rating button{padding:12px 8px}.flashcard{min-height:270px;display:grid;place-items:center;text-align:center;padding:28px;border-radius:18px;background:linear-gradient(145deg,var(--panel),var(--panel2));border:1px solid var(--line)}.flash-main{font-size:2rem;font-weight:750;letter-spacing:-.03em}.flash-sub{color:var(--muted);margin-top:8px}.kicker{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}.topic-row{display:grid;grid-template-columns:1.3fr .8fr .8fr 1fr auto;gap:8px;align-items:center}.chart-bars{display:flex;align-items:end;gap:7px;height:110px;padding-top:10px}.bar{flex:1;background:var(--accent);min-height:2px;border-radius:5px 5px 2px 2px;opacity:.8}.word{border:0;background:transparent;color:inherit;padding:1px 2px;border-bottom:1px dotted var(--muted)}.word:hover{color:var(--accent)}.conversation{display:grid;gap:10px}.bubble{max-width:78%;padding:11px 13px;border-radius:14px;background:var(--panel2);line-height:1.4}.bubble.user{justify-self:end;background:var(--accent);color:white}.notice{padding:12px 14px;border-radius:12px;background:var(--panel2);color:var(--muted);font-size:.88rem}.mobile-nav{display:none}.status-dot{width:8px;height:8px;border-radius:50%;background:var(--good);display:inline-block}.danger{color:var(--accent)}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.sidebar{display:none}.main{padding:22px 16px 88px}.card,.card.wide{grid-column:span 6}.mobile-nav{display:flex;position:fixed;bottom:0;left:0;right:0;background:var(--panel);border-top:1px solid var(--line);z-index:30;padding:7px;gap:3px;overflow-x:auto}.mobile-nav button{min-width:72px;border:0;background:transparent;color:var(--muted);font-size:.72rem;padding:8px 6px;border-radius:9px}.mobile-nav button.active{background:var(--panel2);color:var(--text)}}
+@media(max-width:620px){.topbar{padding:0 14px}.main{padding-top:20px}.card,.card.wide{grid-column:1/-1}.grid{gap:12px}.topic-row{grid-template-columns:1fr}.rating{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:2.4rem}.flash-main{font-size:1.6rem}}
+
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <script>
+
+// ---- utils.js ----
+const uid = (prefix='id') => `${prefix}_${crypto.randomUUID ? crypto.randomUUID() : Date.now()+Math.random()}`;
+const nowISO = () => new Date().toISOString();
+const daysFromNowISO = days => new Date(Date.now() + days * 86400000).toISOString();
+const minutesFromNowISO = mins => new Date(Date.now() + mins * 60000).toISOString();
+const clamp = (n, min, max) => Math.min(max, Math.max(min, n));
+const normalize = s => (s || '').toLocaleLowerCase('pl-PL').trim().replace(/[.,!?;:]/g,'').replace(/\s+/g,' ');
+const escapeHtml = s => String(s ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#039;','"':'&quot;'}[c]));
+const dateLabel = iso => new Intl.DateTimeFormat('en', {month:'short', day:'numeric'}).format(new Date(iso));
+const sameDay = (a,b) => new Date(a).toDateString() === new Date(b).toDateString();
+function shuffled(items) { return [...items].sort(() => Math.random() - .5); }
+function scoreToPct(correct,total){ return total ? Math.round(correct/total*100) : 0; }
+
+
+// ---- scheduler.js ----
+// SM-2-derived scheduler using four UI ratings mapped to SM-2 quality scores.
+// Again=1, Hard=3, Good=4, Easy=5. Ease follows the published SM-2 update formula.
+const RATING_QUALITY = { again: 1, hard: 3, good: 4, easy: 5 };
+
+function newSchedule() {
+  return { repetitions: 0, ease: 2.5, intervalDays: 0, due: new Date().toISOString(), lapses: 0, lastReview: null };
+}
+
+function scheduleReview(schedule, rating, at = new Date()) {
+  const q = RATING_QUALITY[rating];
+  if (!q) throw new Error(`Unknown rating: ${rating}`);
+  let { repetitions=0, ease=2.5, intervalDays=0, lapses=0 } = schedule || newSchedule();
+  const oldEase = ease;
+  ease = clamp(ease + (0.1 - (5-q) * (0.08 + (5-q)*0.02)), 1.3, 3.0);
+
+  let due;
+  if (q < 3) {
+    repetitions = 0;
+    intervalDays = 0;
+    lapses += 1;
+    due = new Date(at.getTime() + 10 * 60000).toISOString();
+  } else {
+    repetitions += 1;
+    if (repetitions === 1) intervalDays = rating === 'easy' ? 4 : 1;
+    else if (repetitions === 2) intervalDays = rating === 'hard' ? 3 : rating === 'easy' ? 8 : 6;
+    else {
+      const modifier = rating === 'hard' ? 0.8 : rating === 'easy' ? 1.3 : 1;
+      intervalDays = Math.max(1, Math.round(intervalDays * oldEase * modifier));
+    }
+    due = new Date(at.getTime() + intervalDays * 86400000).toISOString();
+  }
+  return { repetitions, ease: Number(ease.toFixed(3)), intervalDays, due, lapses, lastReview: at.toISOString() };
+}
+
+function isDue(schedule, at = new Date()) {
+  return !schedule?.due || new Date(schedule.due) <= at;
+}
+
+function dueLabel(schedule) {
+  const diff = new Date(schedule.due).getTime() - Date.now();
+  if (diff <= 0) return 'Due now';
+  const mins = Math.round(diff/60000);
+  if (mins < 60) return `in ${mins} min`;
+  const days = Math.round(diff/86400000);
+  return days <= 1 ? 'tomorrow' : `in ${days} days`;
+}
+
+
+// ---- data.js ----
+const DEFAULT_TOPICS = [
+  { id:'case-acc', title:'Accusative case', category:'Grammar', status:'in_progress' },
+  { id:'case-gen', title:'Genitive case', category:'Grammar', status:'in_progress' },
+  { id:'case-nom', title:'Nominative case', category:'Grammar', status:'studied' },
+  { id:'adj-agreement', title:'Adjective–noun agreement', category:'Grammar', status:'in_progress' },
+  { id:'daily-life', title:'Daily life vocabulary', category:'Vocabulary', status:'studied' }
+];
+
+const VOCAB = [
+  {id:'v1', lemma:'mieszkanie', meaning:'apartment / flat', gender:'neuter', forms:'gen. mieszkania; loc. mieszkaniu', example:'Szukam nowego mieszkania.', tags:['home','case-gen']},
+  {id:'v2', lemma:'książka', meaning:'book', gender:'feminine', forms:'acc. książkę; gen. książki', example:'Czytam ciekawą książkę.', tags:['objects','case-acc']},
+  {id:'v3', lemma:'pies', meaning:'dog', gender:'masculine animate', forms:'acc./gen. psa', example:'Widzę dużego psa.', tags:['animals','case-acc']},
+  {id:'v4', lemma:'telefon', meaning:'phone', gender:'masculine inanimate', forms:'acc. telefon; gen. telefonu', example:'Nie mam teraz telefonu.', tags:['objects','case-gen']},
+  {id:'v5', lemma:'kobieta', meaning:'woman', gender:'feminine', forms:'acc. kobietę; gen. kobiety', example:'Widzę tę kobietę codziennie.', tags:['people','case-acc']},
+  {id:'v6', lemma:'przyjaciel', meaning:'friend (male)', gender:'masculine personal', forms:'instr. przyjacielem; gen. przyjaciela', example:'Idę z dobrym przyjacielem.', tags:['people','case-inst']},
+  {id:'v7', lemma:'praca', meaning:'work / job', gender:'feminine', forms:'loc. pracy; gen. pracy', example:'Rozmawiamy o pracy.', tags:['work','case-loc']},
+  {id:'v8', lemma:'potrzebować', meaning:'to need', gender:'verb', forms:'governs genitive', example:'Potrzebuję więcej czasu.', tags:['verbs','case-gen']},
+  {id:'v9', lemma:'szukać', meaning:'to look for', gender:'verb', forms:'governs genitive', example:'Szukam kluczy.', tags:['verbs','case-gen']},
+  {id:'v10', lemma:'kupować', meaning:'to buy (imperfective)', gender:'verb', forms:'1sg kupuję; 3pl kupują', example:'Często kupuję warzywa.', tags:['shopping','verbs']},
+  {id:'v11', lemma:'dworzec', meaning:'station', gender:'masculine inanimate', forms:'gen. dworca; loc. dworcu', example:'Gdzie jest dworzec?', tags:['travel']},
+  {id:'v12', lemma:'rachunek', meaning:'bill / check', gender:'masculine inanimate', forms:'acc. rachunek; gen. rachunku', example:'Poproszę rachunek.', tags:['restaurant']}
+];
+
+const GRAMMAR_EXERCISES = [
+  {id:'g1', topics:['case-gen','adj-agreement'], type:'translation', prompt:'Translate: I am looking for a beautiful apartment.', accepted:['Szukam pięknego mieszkania'], answer:'Szukam pięknego mieszkania.', explanation:'The verb “szukać” governs the genitive. “Mieszkanie” is neuter; its genitive singular is “mieszkania”, and the adjective agrees: “pięknego”.', hint:'Start with “Szukam…”. Which case does szukać require?', level:'A1'},
+  {id:'g2', topics:['case-gen'], type:'translation', prompt:'Translate: I have this book, but I do not have this phone.', accepted:['Mam tę książkę ale nie mam tego telefonu','Mam tę książkę, ale nie mam tego telefonu'], answer:'Mam tę książkę, ale nie mam tego telefonu.', explanation:'“Mam” normally takes the accusative: “tę książkę”. Under negation, the direct object is normally genitive: “nie mam tego telefonu”.', hint:'Negating “mam” changes the case of the object.', level:'A1'},
+  {id:'g3', topics:['case-acc'], type:'translation', prompt:'Translate: I see this dog.', accepted:['Widzę tego psa'], answer:'Widzę tego psa.', explanation:'Masculine animate nouns use the genitive-shaped form in the accusative singular: “pies” → “psa”; “ten” → “tego”.', hint:'“Pies” is masculine animate.', level:'A1'},
+  {id:'g4', topics:['case-acc','adj-agreement'], type:'translation', prompt:'Translate: I see this beautiful woman.', accepted:['Widzę tę piękną kobietę'], answer:'Widzę tę piękną kobietę.', explanation:'A feminine singular direct object takes accusative forms: “tę”, “piękną”, “kobietę”.', hint:'All three feminine words need accusative forms.', level:'A1'},
+  {id:'g5', topics:['case-dat'], type:'translation', prompt:'Translate: I give the book to my sister.', accepted:['Daję książkę mojej siostrze'], answer:'Daję książkę mojej siostrze.', explanation:'The recipient of “dawać” is expressed with the dative: “mojej siostrze”. The thing given remains accusative: “książkę”.', hint:'The recipient (“to my sister”) needs dative.', level:'A2'},
+  {id:'g6', topics:['case-inst','adj-agreement'], type:'translation', prompt:'Translate: I am going with a good friend.', accepted:['Idę z dobrym przyjacielem'], answer:'Idę z dobrym przyjacielem.', explanation:'The preposition “z” meaning “with” governs the instrumental: “dobrym przyjacielem”.', hint:'“Z” = “with” requires instrumental.', level:'A1'},
+  {id:'g7', topics:['case-loc','adj-agreement'], type:'translation', prompt:'Translate: We are talking about Polish music.', accepted:['Rozmawiamy o polskiej muzyce'], answer:'Rozmawiamy o polskiej muzyce.', explanation:'“O” meaning “about” takes the locative: “o polskiej muzyce”.', hint:'After “o” = “about”, use locative.', level:'A1'},
+  {id:'g8', topics:['case-gen'], type:'correct', prompt:'Correct the sentence: Szukam pięknego mieszkaniu.', accepted:['Szukam pięknego mieszkania'], answer:'Szukam pięknego mieszkania.', explanation:'“Szukać” requires the genitive, so “mieszkanie” becomes “mieszkania”. “Mieszkaniu” is a locative/dative form, not the form required here.', hint:'Ask: which case does “szukać” govern?', level:'A1'},
+  {id:'g9', topics:['case-gen'], type:'case', prompt:'Which case is required after “potrzebować” (to need)?', accepted:['genitive','dopełniacz'], answer:'Genitive (dopełniacz).', explanation:'“Potrzebować” governs the genitive: “Potrzebuję czasu / samochodu / pomocy”.', hint:'Think of “Potrzebuję czasu”.', level:'A1'},
+  {id:'g10', topics:['case-acc'], type:'ending', prompt:'Fill the form: Kupuję nową ___ (koszula).', accepted:['koszulę'], answer:'koszulę', explanation:'“Kupować” takes a direct object in the accusative. Feminine -a nouns usually change -a → -ę in the accusative singular: “koszula” → “koszulę”.', hint:'This is a feminine direct object.', level:'A1'},
+  {id:'g11', topics:['case-gen'], type:'explain', prompt:'Why is “samochodu” used in “Potrzebuję tego samochodu”?', accepted:['because potrzebować takes genitive','potrzebować takes the genitive','genitive'], answer:'Because “potrzebować” governs the genitive; “samochód” → “samochodu”.', explanation:'The -u ending here is genitive singular. Polish case endings are not one-to-one with cases: the same ending can appear in different cases for different nouns.', hint:'Case is determined by the governing word, not by a single ending.', level:'A1'}
+];
+
+const READINGS = [
+  {id:'r1', level:'A1', title:'Sobota rano', text:'W sobotę rano Marek idzie na targ. Kupuje pomidory, chleb i ser. Potem spotyka koleżankę i piją razem kawę. Marek wraca do domu przed południem.', questions:[
+    {q:'Where does Marek go on Saturday morning?', accepted:['market','the market','targ'], answer:'He goes to the market.'},
+    {q:'What does he buy?', accepted:['tomatoes bread and cheese','pomidory chleb i ser','tomatoes, bread and cheese'], answer:'Tomatoes, bread and cheese.'}
+  ]},
+  {id:'r2', level:'A2', title:'Plan na weekend', text:'Ania chciała pojechać w góry, ale prognoza pogody była zła. Zamiast tego jedzie z przyjaciółmi do muzeum, a wieczorem planują ugotować kolację i obejrzeć film.', questions:[
+    {q:'Why does Ania change her plan?', accepted:['bad weather','the weather forecast was bad','zła prognoza pogody'], answer:'Because the weather forecast was bad.'},
+    {q:'What are they planning for the evening?', accepted:['cook dinner and watch a film','ugotować kolację i obejrzeć film'], answer:'Cook dinner and watch a film.'}
+  ]}
+];
+
+const LEXICON = {
+  'sobotę': ['sobota','Saturday','accusative after “w” for a recurring day expression'],
+  'targ': ['targ','market','accusative after “na” with movement'],
+  'kupuje': ['kupować','buys','3rd person singular, present'],
+  'koleżankę': ['koleżanka','female friend / colleague','accusative singular'],
+  'wraca': ['wracać','returns','3rd person singular, present'],
+  'południem': ['południe','noon','instrumental in “przed południem”'],
+  'chciała': ['chcieć','wanted','past tense, feminine singular'],
+  'góry': ['góra','mountains','accusative plural in “w góry”'],
+  'przyjaciółmi': ['przyjaciel','friends','instrumental plural after “z”']
+};
+
+const CONVERSATION_SCENARIOS = [
+  {id:'restaurant', title:'Ordering food', level:'A1', turns:[
+    {npc:'Dzień dobry. Co podać?', suggestions:['Poproszę zupę pomidorową.','Dla mnie pierogi, proszę.'], keywords:['poproszę','proszę','dla mnie']},
+    {npc:'Coś do picia?', suggestions:['Poproszę wodę niegazowaną.','Kawę, proszę.'], keywords:['wodę','kawę','herbatę','piwo','sok']},
+    {npc:'Czy to wszystko?', suggestions:['Tak, dziękuję.','Jeszcze sałatkę, proszę.'], keywords:['tak','jeszcze','dziękuję']},
+    {npc:'Smacznego!', suggestions:['Dziękuję!'], keywords:['dziękuję','dzięki']}
+  ]}
+];
+
+
+// ---- db.js ----
+const DB_NAME = 'polskilab';
+const DB_VERSION = 1;
+const STORES = ['profile','topics','vocab','cards','reviews','mistakes','activity','writing'];
+let dbPromise;
+
+function openDB(){
+  if (dbPromise) return dbPromise;
+  dbPromise = new Promise((resolve,reject)=>{
+    const req = indexedDB.open(DB_NAME, DB_VERSION);
+    req.onupgradeneeded = () => {
+      const db = req.result;
+      for (const s of STORES) if (!db.objectStoreNames.contains(s)) db.createObjectStore(s,{keyPath:'id'});
+    };
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error);
+  });
+  return dbPromise;
+}
+
+async function getAll(store){ const db=await openDB(); return new Promise((res,rej)=>{ const r=db.transaction(store).objectStore(store).getAll(); r.onsuccess=()=>res(r.result); r.onerror=()=>rej(r.error); }); }
+async function get(store,id){ const db=await openDB(); return new Promise((res,rej)=>{ const r=db.transaction(store).objectStore(store).get(id); r.onsuccess=()=>res(r.result); r.onerror=()=>rej(r.error); }); }
+async function put(store,value){ const db=await openDB(); return new Promise((res,rej)=>{ const r=db.transaction(store,'readwrite').objectStore(store).put(value); r.onsuccess=()=>res(value); r.onerror=()=>rej(r.error); }); }
+async function add(store,value){ return put(store,value); }
+async function remove(store,id){ const db=await openDB(); return new Promise((res,rej)=>{ const r=db.transaction(store,'readwrite').objectStore(store).delete(id); r.onsuccess=()=>res(); r.onerror=()=>rej(r.error); }); }
+async function clear(store){ const db=await openDB(); return new Promise((res,rej)=>{ const r=db.transaction(store,'readwrite').objectStore(store).clear(); r.onsuccess=()=>res(); r.onerror=()=>rej(r.error); }); }
+
+async function seed(){
+  if (!(await get('profile','me'))) await put('profile',{id:'me',name:'Learner',level:'A1',dailyMinutes:15,theme:'system',createdAt:nowISO()});
+  if ((await getAll('topics')).length === 0) for (const t of DEFAULT_TOPICS) await put('topics',{...t,source:'manual starter',volume:'',lesson:'',notes:'',updatedAt:nowISO()});
+  if ((await getAll('vocab')).length === 0) {
+    for (const v of VOCAB) {
+      await put('vocab',v);
+      for (const direction of ['pl-en','en-pl']) await put('cards',{id:`${v.id}:${direction}`,vocabId:v.id,direction,schedule:newSchedule(),createdAt:nowISO()});
+    }
+  }
+}
+
+async function logActivity(data){ return put('activity',{id:uid('act'),at:nowISO(),...data}); }
+async function logMistake(data){ return put('mistakes',{id:uid('mistake'),createdAt:nowISO(),timesSeen:1,resolved:false,...data}); }
+
+async function exportData(){
+  const out = {version:1, exportedAt:nowISO(), stores:{}};
+  for (const s of STORES) out.stores[s]=await getAll(s);
+  return out;
+}
+async function importData(data){
+  if (!data?.stores) throw new Error('Invalid PolskiLab export');
+  for (const s of STORES) {
+    await clear(s);
+    for (const item of (data.stores[s] || [])) await put(s,item);
+  }
+}
+
+
+// ---- grammar.js ----
+function evaluateExercise(exercise, input) {
+  const n = normalize(input);
+  const accepted = exercise.accepted.map(normalize);
+  const exact = accepted.includes(n);
+  if (exact) return { correct:true, status:'correct', message:'Correct.' };
+
+  // Conservative partial matching only for explanation-style responses.
+  if (exercise.type === 'explain' && n.includes('genitive') && n.includes('potrzeb')) {
+    return {correct:true, status:'correct', message:'Correct reasoning.'};
+  }
+  return { correct:false, status:'incorrect', message:'Not quite.' };
+}
+
+function diacriticHint(input, answer) {
+  const strip = s => normalize(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  return strip(input) === strip(answer) && normalize(input) !== normalize(answer)
+    ? 'Your structure is right, but check the Polish diacritics.' : null;
+}
+
+
+// ---- app.js ----
+const NAV = [
+  ['dashboard','Dashboard'],['daily','Daily Practice'],['grammar','Grammar Lab'],['vocab','Vocabulary & Reviews'],
+  ['conversation','Conversation'],['reading','Reading & Listening'],['writing','Writing'],['progress','Progress'],['textbook','Textbook Companion']
+];
+
+const state = {
+  route:'dashboard', profile:null, topics:[], vocab:[], cards:[], reviews:[], mistakes:[], activity:[], writing:[],
+  grammarIndex:0, grammarFilter:'all', vocabQueue:[], vocabPos:0, revealCard:false, currentInput:'', readingIndex:0,
+  conversation:{scenario:'restaurant',mode:'guided',turn:0,messages:[],responses:[]}, dailyMinutes:15, dailyPlan:null
+};
+
+async function refresh(){
+  [state.profile,state.topics,state.vocab,state.cards,state.reviews,state.mistakes,state.activity,state.writing] = await Promise.all([
+    get('profile','me'),getAll('topics'),getAll('vocab'),getAll('cards'),getAll('reviews'),getAll('mistakes'),getAll('activity'),getAll('writing')
+  ]);
+}
+
+function icon(name){
+  const map={dashboard:'⌂',daily:'◷',grammar:'Aa',vocab:'▣',conversation:'◌',reading:'◫',writing:'✎',progress:'↗',textbook:'▤'};
+  return map[name]||'•';
+}
+
+function shell(){
+  const app=document.querySelector('#app');
+  app.innerHTML=`<div class="app">
+    <header class="topbar"><div class="brand"><span class="brand-mark"></span><span>PolskiLab</span></div>
+      <div class="top-actions"><button class="icon-btn" id="themeBtn" title="Toggle theme">◐</button><button class="icon-btn" id="dataBtn" title="Export / import">⇅</button></div></header>
+    <div class="layout"><aside class="sidebar"><nav class="nav">${NAV.map(([id,label])=>`<button data-route="${id}" class="${state.route===id?'active':''}">${icon(id)}&nbsp;&nbsp;${label}</button>`).join('')}</nav>
+      <div class="notice" style="margin-top:20px"><span class="status-dot"></span> Local-first<br><span class="small">Your learning data stays in this browser.</span></div></aside>
+      <main class="main" id="view"></main></div>
+    <nav class="mobile-nav">${NAV.slice(0,6).map(([id,label])=>`<button data-route="${id}" class="${state.route===id?'active':''}">${icon(id)}<br>${label.split(' ')[0]}</button>`).join('')}</nav>
+    <input id="importFile" type="file" accept="application/json" hidden />
+  </div>`;
+  bindGlobal(); renderRoute();
+}
+
+function bindGlobal(){
+  document.querySelectorAll('[data-route]').forEach(b=>b.onclick=()=>go(b.dataset.route));
+  document.querySelector('#themeBtn').onclick=async()=>{
+    const root=document.documentElement; const current=root.dataset.theme||'system';
+    const next=current==='system'?'dark':current==='dark'?'light':'system'; root.dataset.theme=next==='system'?'':next;
+    state.profile.theme=next; await put('profile',state.profile); toast(`Theme: ${next}`);
+  };
+  document.querySelector('#dataBtn').onclick=()=>showDataDialog();
+  document.querySelector('#importFile').onchange=handleImport;
+}
+
+function go(route){ state.route=route; shell(); window.scrollTo({top:0,behavior:'smooth'}); }
+function view(html){ document.querySelector('#view').innerHTML=html; }
+function titleBlock(eyebrow,title,sub=''){ return `<section class="hero"><div class="eyebrow">${escapeHtml(eyebrow)}</div><h1>${escapeHtml(title)}</h1>${sub?`<p>${escapeHtml(sub)}</p>`:''}</section>`; }
+function toast(msg){
+  const el=document.createElement('div');el.textContent=msg;Object.assign(el.style,{position:'fixed',right:'16px',top:'76px',background:'var(--text)',color:'var(--bg)',padding:'10px 14px',borderRadius:'10px',zIndex:100,fontWeight:700});document.body.appendChild(el);setTimeout(()=>el.remove(),1800);
+}
+
+function dueCards(){ return state.cards.filter(c=>isDue(c.schedule)); }
+function recentActivities(days=7){ const cutoff=Date.now()-days*86400000; return state.activity.filter(a=>new Date(a.at).getTime()>=cutoff); }
+function studiedTopicIds(){ return state.topics.filter(t=>t.status!=='not_studied').map(t=>t.id); }
+function topicName(id){ return state.topics.find(t=>t.id===id)?.title || id.replace('case-','').replaceAll('-',' '); }
+
+function renderRoute(){
+  ({dashboard:renderDashboard,daily:renderDaily,grammar:renderGrammar,vocab:renderVocab,conversation:renderConversation,reading:renderReading,writing:renderWriting,progress:renderProgress,textbook:renderTextbook}[state.route]||renderDashboard)();
+}
+
+function renderDashboard(){
+  const due=dueCards().length, activeMistakes=state.mistakes.filter(m=>!m.resolved).length, recent=recentActivities(7);
+  const correct=recent.filter(a=>a.correct===true).length, attempts=recent.filter(a=>typeof a.correct==='boolean').length;
+  const weak=weaknesses().slice(0,4);
+  view(`${titleBlock('Local-first Polish learning','Dzień dobry.','A calm daily workspace for retention, grammar accuracy, and practical Polish — not XP.')}
+    <div class="grid">
+      <section class="card"><div class="kicker">Due reviews</div><div class="metric">${due}</div><p class="muted small">Production and recognition are tracked separately.</p><button class="btn primary" id="reviewNow">Review now</button></section>
+      <section class="card"><div class="kicker">7-day accuracy</div><div class="metric">${attempts?scoreToPct(correct,attempts)+'%':'—'}</div><p class="muted small">Based only on scored attempts, not completion.</p></section>
+      <section class="card"><div class="kicker">Recurring errors</div><div class="metric">${activeMistakes}</div><p class="muted small">Mistakes feed back into targeted practice.</p></section>
+      <section class="card wide"><h2>Start a focused session</h2><p class="muted">Choose the time you genuinely have. The mix adapts to due reviews, recent mistakes and studied topics.</p><div class="seg" id="dashDurations">${[5,10,15,20,30].map(n=>`<button data-min="${n}" class="${n===state.dailyMinutes?'active':''}">${n} min</button>`).join('')}</div><div style="height:12px"></div><button class="btn primary" id="buildSession">Build today’s session</button></section>
+      <section class="card"><h2>Needs attention</h2>${weak.length?`<div class="list">${weak.map(w=>`<div class="list-item"><strong>${escapeHtml(w.label)}</strong><div class="small muted">${w.count} recorded error${w.count===1?'':'s'}</div></div>`).join('')}</div>`:'<p class="muted small">No recurring errors yet. Practice will populate this honestly.</p>'}</section>
+      <section class="card full"><div class="row space"><div><h2>Textbook companion</h2><p class="muted small">No fixed Krok po kroku chapter map is assumed. Add what you actually studied.</p></div><button class="btn" id="openTextbook">Manage topics</button></div><div class="row">${state.topics.filter(t=>t.status!=='not_studied').slice(0,8).map(t=>`<span class="pill">${escapeHtml(t.title)} · ${t.status.replace('_',' ')}</span>`).join('')}</div></section>
+    </div>`);
+  document.querySelector('#reviewNow').onclick=()=>go('vocab');
+  document.querySelector('#openTextbook').onclick=()=>go('textbook');
+  document.querySelectorAll('#dashDurations button').forEach(b=>b.onclick=()=>{state.dailyMinutes=Number(b.dataset.min);renderDashboard();});
+  document.querySelector('#buildSession').onclick=()=>{state.dailyPlan=buildDailyPlan(state.dailyMinutes);go('daily');};
+}
+
+function buildDailyPlan(minutes){
+  const due=dueCards().length; const weak=weaknesses(); const studied=studiedTopicIds();
+  const slots=Math.max(2,Math.round(minutes/4)); const tasks=[];
+  if(due) tasks.push({type:'vocab',title:`Review ${Math.min(due,Math.max(3,slots*2))} due cards`,why:'Due retrieval gets priority because delayed recall is the core retention signal.'});
+  if(weak.length) tasks.push({type:'grammar',topic:weak[0].id,title:`Repair: ${weak[0].label}`,why:'This concept has produced recent errors.'});
+  const eligible=GRAMMAR_EXERCISES.filter(g=>g.topics.some(t=>studied.includes(t)));
+  if(eligible.length) tasks.push({type:'grammar',title:'Mixed grammar retrieval',why:'Interleaves already encountered material instead of blocking one rule.'});
+  if(minutes>=10) tasks.push({type:'reading',title:'Short reading / listening',why:'Adds comprehensible input and meaning-focused comprehension.'});
+  if(minutes>=15) tasks.push({type:'conversation',title:'One practical exchange',why:'Ends with meaningful output rather than recognition only.'});
+  if(minutes>=20 && weak[1]) tasks.push({type:'grammar',topic:weak[1].id,title:`Second repair: ${weak[1].label}`,why:'Extra time is used for demonstrated weaknesses, not filler.'});
+  return tasks.slice(0,Math.max(2,slots));
+}
+
+function renderDaily(){
+  const plan=state.dailyPlan||buildDailyPlan(state.dailyMinutes);
+  view(`${titleBlock('Adaptive practice',`${state.dailyMinutes}-minute session`,'Do what fits today. Nothing here is required for a streak.')}
+    <div class="grid"><section class="card full"><div class="row space"><div class="seg" id="dailyDurations">${[5,10,15,20,30].map(n=>`<button data-min="${n}" class="${n===state.dailyMinutes?'active':''}">${n} min</button>`).join('')}</div><button class="btn ghost" id="rebuild">Rebuild</button></div></section>
+    ${plan.map((t,i)=>`<section class="card ${i===0?'wide':''}"><div class="kicker">${i+1} · ${escapeHtml(t.type)}</div><h2>${escapeHtml(t.title)}</h2><p class="muted small">${escapeHtml(t.why)}</p><button class="btn ${i===0?'primary':''}" data-task="${i}">Start</button></section>`).join('')}
+    <section class="card full"><div class="notice"><strong>How adaptation works:</strong> due reviews first when present, then recurring mistakes, then interleaved encountered concepts. Longer sessions add input and output. There are no arbitrary fixed percentages.</div></section></div>`);
+  document.querySelectorAll('#dailyDurations button').forEach(b=>b.onclick=()=>{state.dailyMinutes=Number(b.dataset.min);state.dailyPlan=buildDailyPlan(state.dailyMinutes);renderDaily();});
+  document.querySelector('#rebuild').onclick=()=>{state.dailyPlan=buildDailyPlan(state.dailyMinutes);renderDaily();};
+  document.querySelectorAll('[data-task]').forEach(b=>b.onclick=()=>{const t=plan[Number(b.dataset.task)]; if(t.type==='grammar'){state.grammarFilter=t.topic||'all';go('grammar')} else go(t.type);});
+}
+
+function availableGrammar(){
+  let pool=[...GRAMMAR_EXERCISES];
+  if(state.grammarFilter!=='all') pool=pool.filter(g=>g.topics.includes(state.grammarFilter));
+  const studied=studiedTopicIds(); const matched=pool.filter(g=>g.topics.some(t=>studied.includes(t)));
+  return matched.length?matched:pool;
+}
+
+function renderGrammar(){
+  const pool=availableGrammar(); if(state.grammarIndex>=pool.length) state.grammarIndex=0; const ex=pool[state.grammarIndex];
+  const filters=['all',...new Set(GRAMMAR_EXERCISES.flatMap(g=>g.topics))];
+  view(`${titleBlock('Grammar laboratory','Retrieve, diagnose, retry.','Deterministic answer checking is conservative: known valid variants are accepted; stylistic rewrites are not forced.')}
+    <div class="grid"><section class="card full"><div class="row space"><div class="seg" id="grammarFilters">${filters.map(f=>`<button data-filter="${f}" class="${state.grammarFilter===f?'active':''}">${f==='all'?'Mixed':escapeHtml(topicName(f))}</button>`).join('')}</div><span class="pill">${escapeHtml(ex.type)}</span></div></section>
+    <section class="card full exercise"><div class="kicker">${escapeHtml(ex.level)} · ${escapeHtml(ex.topics.map(topicName).join(' + '))}</div><div class="prompt">${escapeHtml(ex.prompt)}</div>
+      <div class="field"><input id="grammarInput" autocomplete="off" autocapitalize="sentences" placeholder="Type your answer in Polish…"></div><div class="row" style="margin-top:10px"><button class="btn primary" id="checkGrammar">Check</button><button class="btn" id="hintGrammar">Hint</button><button class="btn ghost" id="skipGrammar">Another example</button></div><div id="grammarFeedback" style="margin-top:14px"></div></section></div>`);
+  document.querySelectorAll('#grammarFilters button').forEach(b=>b.onclick=()=>{state.grammarFilter=b.dataset.filter;state.grammarIndex=0;renderGrammar();});
+  const input=document.querySelector('#grammarInput'); input.onkeydown=e=>{if(e.key==='Enter')checkGrammar(ex,input.value)};
+  document.querySelector('#checkGrammar').onclick=()=>checkGrammar(ex,input.value);
+  document.querySelector('#hintGrammar').onclick=()=>{document.querySelector('#grammarFeedback').innerHTML=`<div class="feedback">💡 ${escapeHtml(ex.hint)}</div>`};
+  document.querySelector('#skipGrammar').onclick=()=>{state.grammarIndex=(state.grammarIndex+1)%pool.length;renderGrammar();};
+}
+
+async function checkGrammar(ex,input){
+  if(!input.trim()) return; const result=evaluateExercise(ex,input); const dHint=diacriticHint(input,ex.accepted[0]);
+  const fb=document.querySelector('#grammarFeedback');
+  if(result.correct){
+    fb.innerHTML=`<div class="feedback good"><strong>Correct.</strong><div>${escapeHtml(ex.explanation)}</div></div><div class="row" style="margin-top:10px"><button class="btn" id="nextGrammar">Next question</button><button class="btn ghost" id="whyGrammar">Why is this correct?</button></div>`;
+    await logActivity({type:'grammar',exerciseId:ex.id,concepts:ex.topics,correct:true,mode:ex.type}); await refresh();
+    document.querySelector('#nextGrammar').onclick=()=>{state.grammarIndex=(state.grammarIndex+1)%availableGrammar().length;renderGrammar()};
+    document.querySelector('#whyGrammar').onclick=()=>toast(ex.explanation);
+  } else {
+    const clue=dHint?`<div><strong>Close:</strong> ${escapeHtml(dHint)}</div>`:'';
+    fb.innerHTML=`<div class="feedback bad"><strong>Not quite.</strong>${clue}<div style="margin-top:6px">Correct answer: <strong>${escapeHtml(ex.answer)}</strong></div><div class="small muted" style="margin-top:7px">${escapeHtml(ex.explanation)}</div></div><div class="row" style="margin-top:10px"><button class="btn primary" id="retryGrammar">Retry from memory</button><button class="btn" id="whyWrong">Why is this wrong?</button></div>`;
+    await logMistake({concept:ex.topics[0],concepts:ex.topics,exerciseType:ex.type,prompt:ex.prompt,userAnswer:input,correctAnswer:ex.answer,explanation:ex.explanation});
+    await logActivity({type:'grammar',exerciseId:ex.id,concepts:ex.topics,correct:false,mode:ex.type}); await refresh();
+    document.querySelector('#retryGrammar').onclick=()=>{document.querySelector('#grammarInput').value='';document.querySelector('#grammarInput').focus();fb.innerHTML=''};
+    document.querySelector('#whyWrong').onclick=()=>{fb.querySelector('.feedback').innerHTML+=`<div class="notice" style="margin-top:10px">${escapeHtml(ex.explanation)}</div>`};
+  }
+}
+
+function buildVocabQueue(){
+  const due=state.cards.filter(c=>isDue(c.schedule));
+  state.vocabQueue=(due.length?due:state.cards.slice(0,10)).sort((a,b)=>new Date(a.schedule.due)-new Date(b.schedule.due)); state.vocabPos=0; state.revealCard=false;
+}
+
+function renderVocab(){
+  if(!state.vocabQueue.length) buildVocabQueue(); if(state.vocabPos>=state.vocabQueue.length) state.vocabPos=0;
+  const card=state.vocabQueue[state.vocabPos]; const item=card&&state.vocab.find(v=>v.id===card.vocabId);
+  if(!card||!item){ view(titleBlock('Vocabulary','No cards yet','Add a vocabulary item below.')); return; }
+  const production=card.direction==='en-pl'; const front=production?item.meaning:item.lemma; const answer=production?item.lemma:item.meaning;
+  const dueCount=dueCards().length;
+  view(`${titleBlock('Spaced retrieval','Vocabulary & reviews',`${dueCount} card${dueCount===1?'':'s'} due. Production and recognition have separate schedules.`)}
+  <div class="grid"><section class="card wide"><div class="row space"><span class="pill">${production?'English → Polish · production':'Polish → English · recognition'}</span><span class="small muted">${state.vocabPos+1} / ${state.vocabQueue.length}</span></div>
+    <div class="flashcard"><div><div class="kicker">${production?'Produce the Polish lemma':'Recall the meaning'}</div><div class="flash-main">${escapeHtml(front)}</div>${state.revealCard?`<div class="flash-sub"><strong>${escapeHtml(answer)}</strong><br>${escapeHtml(item.gender)} · ${escapeHtml(item.forms)}<br><em>${escapeHtml(item.example)}</em></div>`:''}</div></div>
+    ${state.revealCard?`<div class="rating" style="margin-top:12px">${['again','hard','good','easy'].map(r=>`<button data-rating="${r}">${r[0].toUpperCase()+r.slice(1)}</button>`).join('')}</div>`:`<div class="field" style="margin-top:12px"><input id="vocabInput" placeholder="Type your recall before revealing…" autocomplete="off"></div><div class="row" style="margin-top:10px"><button class="btn primary" id="revealCard">Reveal answer</button></div>`}
+  </section><section class="card"><h2>Card details</h2><div class="list"><div class="list-item"><span class="muted small">Dictionary form</span><br><strong>${escapeHtml(item.lemma)}</strong></div><div class="list-item"><span class="muted small">Gender / class</span><br>${escapeHtml(item.gender)}</div><div class="list-item"><span class="muted small">Relevant forms</span><br>${escapeHtml(item.forms)}</div><div class="list-item"><span class="muted small">Next due</span><br>${escapeHtml(dueLabel(card.schedule))}</div></div></section>
+  <section class="card full"><h2>Add your own vocabulary</h2><div class="topic-row"><input id="newLemma" placeholder="Polish dictionary form"><input id="newMeaning" placeholder="English meaning"><input id="newGender" placeholder="gender / verb"><input id="newForms" placeholder="relevant inflections"><button class="btn" id="addVocab">Add</button></div></section></div>`);
+  if(!state.revealCard){
+    const input=document.querySelector('#vocabInput'); input.onkeydown=e=>{if(e.key==='Enter') revealVocab(input.value)}; document.querySelector('#revealCard').onclick=()=>revealVocab(input.value);
+  } else document.querySelectorAll('[data-rating]').forEach(b=>b.onclick=()=>rateVocab(card,b.dataset.rating));
+  document.querySelector('#addVocab').onclick=addVocab;
+}
+
+async function revealVocab(input){ state.currentInput=input; state.revealCard=true; renderVocab(); }
+async function rateVocab(card,rating){
+  const item=state.vocab.find(v=>v.id===card.vocabId); const production=card.direction==='en-pl';
+  const expected=production?item.lemma:item.meaning.split('/')[0].trim(); const selfCorrect=normalize(state.currentInput)===normalize(expected);
+  const previous={...card.schedule}; card.schedule=scheduleReview(card.schedule,rating); await put('cards',card);
+  await put('reviews',{id:uid('rev'),cardId:card.id,vocabId:item.id,direction:card.direction,rating,reviewedAt:nowISO(),previousDue:previous.due,nextDue:card.schedule.due,typedAnswer:state.currentInput});
+  await logActivity({type:'vocab',vocabId:item.id,mode:production?'production':'recognition',correct:rating!=='again',typedExact:selfCorrect});
+  if(rating==='again') await logMistake({concept:`vocab:${item.id}`,exerciseType:production?'production':'recognition',prompt:production?item.meaning:item.lemma,userAnswer:state.currentInput,correctAnswer:expected,explanation:`Review the lemma and its context: ${item.example}`});
+  await refresh(); state.vocabPos+=1; state.revealCard=false;state.currentInput=''; if(state.vocabPos>=state.vocabQueue.length) buildVocabQueue(); renderVocab();
+}
+
+async function addVocab(){
+  const lemma=document.querySelector('#newLemma').value.trim(), meaning=document.querySelector('#newMeaning').value.trim(); if(!lemma||!meaning)return toast('Add both lemma and meaning.');
+  const id=uid('v'); const v={id,lemma,meaning,gender:document.querySelector('#newGender').value.trim()||'unspecified',forms:document.querySelector('#newForms').value.trim()||'—',example:'',tags:['manual']};
+  await put('vocab',v); for(const direction of ['pl-en','en-pl'])await put('cards',{id:`${id}:${direction}`,vocabId:id,direction,schedule:newSchedule(),createdAt:nowISO()}); await refresh(); buildVocabQueue();renderVocab();
+}
+
+function renderConversation(){
+  const sc=CONVERSATION_SCENARIOS.find(s=>s.id===state.conversation.scenario); const c=state.conversation;
+  if(!c.messages.length) c.messages=[{from:'npc',text:sc.turns[0].npc}]; const turn=sc.turns[Math.min(c.turn,sc.turns.length-1)]; const done=c.turn>=sc.turns.length;
+  view(`${titleBlock('Meaningful output','Conversation practice','Corrections are delayed until the exchange ends so fluency is not interrupted.')}
+    <div class="grid"><section class="card full"><div class="row space"><div class="seg" id="convMode">${['guided','standard','immersion'].map(m=>`<button data-mode="${m}" class="${c.mode===m?'active':''}">${m}</button>`).join('')}</div><span class="pill">A1 · Restaurant</span></div></section>
+    <section class="card wide"><div class="conversation">${c.messages.map(m=>`<div class="bubble ${m.from==='user'?'user':''}">${escapeHtml(m.text)}</div>`).join('')}</div>
+      ${done?`<div class="feedback good" style="margin-top:14px"><strong>Exchange complete.</strong><div class="small">${conversationFeedback(sc,c.responses)}</div></div><button class="btn" id="restartConv" style="margin-top:10px">Try again</button>`:`${c.mode==='guided'?`<div class="row" style="margin-top:14px">${turn.suggestions.map(s=>`<button class="btn ghost suggestion">${escapeHtml(s)}</button>`).join('')}</div>`:''}<div class="field" style="margin-top:12px"><input id="convInput" placeholder="Reply in Polish…"></div><button class="btn primary" id="sendConv" style="margin-top:10px">Send</button>`}
+    </section><section class="card"><h2>Mode</h2><p class="muted small">Guided shows response support. Standard keeps hints optional. Immersion keeps the exchange Polish-only.</p>${c.mode!=='immersion'&&!done?`<button class="btn" id="convHint">Hint</button><div id="convHintBox" class="small muted" style="margin-top:8px"></div>`:''}</section></div>`);
+  document.querySelectorAll('#convMode button').forEach(b=>b.onclick=()=>{c.mode=b.dataset.mode;renderConversation()});
+  if(done){document.querySelector('#restartConv').onclick=()=>{state.conversation={scenario:'restaurant',mode:c.mode,turn:0,messages:[],responses:[]};renderConversation()};return;}
+  document.querySelectorAll('.suggestion').forEach(b=>b.onclick=()=>{document.querySelector('#convInput').value=b.textContent;document.querySelector('#convInput').focus()});
+  const input=document.querySelector('#convInput'); input.onkeydown=e=>{if(e.key==='Enter')sendConversation(sc,input.value)}; document.querySelector('#sendConv').onclick=()=>sendConversation(sc,input.value);
+  const hint=document.querySelector('#convHint'); if(hint)hint.onclick=()=>document.querySelector('#convHintBox').textContent=`Useful language: ${turn.suggestions.join(' / ')}`;
+}
+
+async function sendConversation(sc,text){
+  if(!text.trim())return; const c=state.conversation; const turn=sc.turns[c.turn]; c.responses.push(text.trim()); c.messages.push({from:'user',text:text.trim()}); c.turn+=1;
+  const match=turn.keywords.some(k=>normalize(text).includes(normalize(k))); await logActivity({type:'conversation',scenario:sc.id,turn:c.turn,correct:match});
+  if(c.turn<sc.turns.length)c.messages.push({from:'npc',text:sc.turns[c.turn].npc}); await refresh();renderConversation();
+}
+function conversationFeedback(sc,responses){
+  const misses=responses.map((r,i)=>({r,i,ok:sc.turns[i]?.keywords.some(k=>normalize(r).includes(normalize(k)))})).filter(x=>!x.ok);
+  if(!misses.length)return 'Your responses used the expected communicative language for this scripted scenario. This is a limited local check, not a full grammatical evaluation.';
+  return `The local checker could not confidently validate ${misses.length} response${misses.length===1?'':'s'}. That does not automatically mean they were wrong; without an AI or full parser, open-ended Polish is intentionally judged conservatively.`;
+}
+
+function tokenize(text){ return text.split(/(\s+|[.,!?])/).map(tok=>{const key=normalize(tok);return LEXICON[key]?`<button class="word" data-word="${escapeHtml(key)}">${escapeHtml(tok)}</button>`:escapeHtml(tok)}).join(''); }
+function renderReading(){
+  const r=READINGS[state.readingIndex%READINGS.length];
+  view(`${titleBlock('Comprehensible input','Reading & listening','Listen before revealing the transcript, or read and inspect selected words in context.')}
+  <div class="grid"><section class="card wide"><div class="row space"><span class="pill">${escapeHtml(r.level)}</span><div class="row"><button class="btn" id="speakNormal">▶ Normal</button><button class="btn" id="speakSlow">▶ Slow</button></div></div><h2>${escapeHtml(r.title)}</h2><div id="transcript" class="prompt" hidden>${tokenize(r.text)}</div><button class="btn primary" id="showTranscript">Reveal transcript</button><div id="wordInfo" class="notice" style="margin-top:12px">Click an underlined word after revealing the transcript.</div></section>
+  <section class="card"><h2>Comprehension</h2><div class="stack">${r.questions.map((q,i)=>`<div class="field"><label>${i+1}. ${escapeHtml(q.q)}</label><input data-rq="${i}"><div id="rqf${i}" class="small"></div></div>`).join('')}<button class="btn" id="checkReading">Check understanding</button></div></section>
+  <section class="card full"><button class="btn ghost" id="nextReading">Another passage</button><div class="notice" style="margin-top:10px">Audio uses your browser/device Polish text-to-speech voice. It is for listening input only; PolskiLab does not claim synthetic speech can assess pronunciation.</div></section></div>`);
+  document.querySelector('#showTranscript').onclick=()=>{document.querySelector('#transcript').hidden=false;document.querySelector('#showTranscript').hidden=true;bindWords()};
+  document.querySelector('#speakNormal').onclick=()=>speakPolish(r.text,.95); document.querySelector('#speakSlow').onclick=()=>speakPolish(r.text,.67);
+  document.querySelector('#checkReading').onclick=async()=>{for(let i=0;i<r.questions.length;i++){const inp=document.querySelector(`[data-rq="${i}"]`);const ok=r.questions[i].accepted.map(normalize).includes(normalize(inp.value));document.querySelector(`#rqf${i}`).textContent=ok?'Correct.':`Answer: ${r.questions[i].answer}`;document.querySelector(`#rqf${i}`).className=`small ${ok?'':'danger'}`;await logActivity({type:'reading',passageId:r.id,question:i,correct:ok})}await refresh()};
+  document.querySelector('#nextReading').onclick=()=>{state.readingIndex=(state.readingIndex+1)%READINGS.length;renderReading()};
+}
+function bindWords(){document.querySelectorAll('[data-word]').forEach(b=>b.onclick=()=>{const [lemma,meaning,role]=LEXICON[b.dataset.word];document.querySelector('#wordInfo').innerHTML=`<strong>${escapeHtml(b.textContent)}</strong> → <strong>${escapeHtml(lemma)}</strong> · ${escapeHtml(meaning)}<br><span class="small">${escapeHtml(role)}</span>`})}
+function speakPolish(text,rate){ if(!('speechSynthesis'in window))return toast('Speech synthesis is not supported in this browser.');speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='pl-PL';u.rate=rate;const voice=speechSynthesis.getVoices().find(v=>v.lang?.toLowerCase().startsWith('pl'));if(voice)u.voice=voice;speechSynthesis.speak(u); }
+
+function renderWriting(){
+  const prompts=['Describe your morning in 5–7 sentences.','Write a short message to a friend about your weekend.','Give your opinion: Is living in a big city better than a small town?'];
+  view(`${titleBlock('Deliberate output','Writing workshop','Draft locally. The free baseline saves your work and runs transparent surface checks; deep four-category language feedback needs an optional AI service.')}
+  <div class="grid"><section class="card wide"><div class="field"><label>Task</label><select id="writePrompt">${prompts.map(p=>`<option>${escapeHtml(p)}</option>`).join('')}</select></div><div class="field" style="margin-top:10px"><label>Your Polish</label><textarea id="writeText" placeholder="Napisz tutaj…"></textarea></div><div class="row"><button class="btn primary" id="saveWriting">Save draft</button><button class="btn" id="localWritingFeedback">Run free local checks</button></div><div id="writeFeedback" style="margin-top:12px"></div></section>
+  <section class="card"><h2>Feedback capability</h2><div class="list"><div class="list-item"><strong>Free, local</strong><br><span class="small muted">Saving, length, sentence boundaries, obvious spacing, diacritic presence, recurring-error prompts.</span></div><div class="list-item"><strong>Optional AI</strong><br><span class="small muted">Grammar, vocabulary choice, naturalness and clarity across open-ended writing. No API key is embedded.</span></div></div></section>
+  <section class="card full"><h2>Saved drafts</h2>${state.writing.length?`<div class="list">${state.writing.slice(-5).reverse().map(w=>`<div class="list-item"><strong>${escapeHtml(w.prompt)}</strong><div class="small muted">${new Date(w.createdAt).toLocaleString()} · ${w.text.split(/\s+/).filter(Boolean).length} words</div></div>`).join('')}</div>`:'<p class="muted small">No drafts saved yet.</p>'}</section></div>`);
+  document.querySelector('#saveWriting').onclick=async()=>{const text=document.querySelector('#writeText').value.trim();if(!text)return;await put('writing',{id:uid('write'),prompt:document.querySelector('#writePrompt').value,text,createdAt:nowISO()});await logActivity({type:'writing',wordCount:text.split(/\s+/).filter(Boolean).length});await refresh();toast('Draft saved locally.');renderWriting()};
+  document.querySelector('#localWritingFeedback').onclick=()=>{const t=document.querySelector('#writeText').value.trim(); const msgs=[]; if(t.length<30)msgs.push('Write a little more before evaluating the piece.');if(t&&!/[.!?]$/.test(t))msgs.push('Your final sentence may be missing end punctuation.');if(/\s{2,}/.test(t))msgs.push('There are repeated spaces to clean up.');if(t&&!/[ąćęłńóśźż]/i.test(t))msgs.push('No Polish diacritics appear. That can be valid, but check whether any are missing.');if(!msgs.length)msgs.push('No simple surface issues detected. This local check cannot reliably judge Polish grammar or naturalness.');document.querySelector('#writeFeedback').innerHTML=`<div class="feedback">${msgs.map(m=>`<div>• ${escapeHtml(m)}</div>`).join('')}</div>`};
+}
+
+function weaknesses(){
+  const map=new Map(); for(const m of state.mistakes.filter(m=>!m.resolved)){const id=m.concept||m.concepts?.[0]||'other'; const cur=map.get(id)||{id,label:id.startsWith('vocab:')?(state.vocab.find(v=>v.id===id.split(':')[1])?.lemma||'Vocabulary item'):topicName(id),count:0};cur.count++;map.set(id,cur)} return [...map.values()].sort((a,b)=>b.count-a.count);
+}
+function renderProgress(){
+  const days=[...Array(7)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()-(6-i));const acts=state.activity.filter(a=>new Date(a.at).toDateString()===d.toDateString());return {label:d.toLocaleDateString('en',{weekday:'short'}),count:acts.length}}); const max=Math.max(1,...days.map(d=>d.count));
+  const prod=state.activity.filter(a=>a.type==='vocab'&&a.mode==='production');const rec=state.activity.filter(a=>a.type==='vocab'&&a.mode==='recognition');
+  view(`${titleBlock('Evidence, not XP','Progress','These are practice signals, not an official CEFR qualification or proof of proficiency.')}
+  <div class="grid"><section class="card"><div class="kicker">Production reviews</div><div class="metric">${prod.length}</div><p class="small muted">English → Polish</p></section><section class="card"><div class="kicker">Recognition reviews</div><div class="metric">${rec.length}</div><p class="small muted">Polish → English</p></section><section class="card"><div class="kicker">Delayed reviews logged</div><div class="metric">${state.reviews.length}</div><p class="small muted">Each includes its next scheduled date.</p></section>
+  <section class="card wide"><h2>Practice activity · 7 days</h2><div class="chart-bars">${days.map(d=>`<div class="bar" title="${d.label}: ${d.count}" style="height:${Math.max(3,d.count/max*100)}%"></div>`).join('')}</div><div class="row space small muted">${days.map(d=>`<span>${d.label}</span>`).join('')}</div></section>
+  <section class="card"><h2>Weaknesses</h2>${weaknesses().length?weaknesses().slice(0,6).map(w=>`<div class="list-item" style="margin-bottom:7px"><strong>${escapeHtml(w.label)}</strong><div class="small muted">${w.count} errors</div></div>`).join(''):'<p class="muted small">No error history yet.</p>'}</section>
+  <section class="card full"><h2>Interpret carefully</h2><p class="muted">Accuracy can rise because exercises become familiar; completion alone does not establish broad proficiency. PolskiLab therefore separates production from recognition and keeps mistakes visible for later retrieval.</p></section></div>`);
+}
+
+function renderTextbook(){
+  view(`${titleBlock('Polski, krok po kroku','Textbook companion','Enter what you actually covered. PolskiLab does not assume or reproduce the book’s chapter syllabus.')}
+  <div class="grid"><section class="card full"><h2>Add a studied objective</h2><div class="topic-row"><input id="topicTitle" placeholder="e.g. Genitive after szukać"><select id="topicCategory"><option>Grammar</option><option>Vocabulary</option><option>Communication</option></select><input id="topicVolume" placeholder="Volume (optional)"><input id="topicLesson" placeholder="Lesson/chapter (optional)"><button class="btn primary" id="addTopic">Add</button></div><div class="field" style="margin-top:10px"><textarea id="topicNotes" placeholder="Your notes, examples, or learning objectives. Do not paste copyrighted textbook pages."></textarea></div></section>
+  <section class="card full"><h2>Your concept record</h2><div class="stack">${state.topics.map(t=>`<div class="list-item topic-row" data-topic="${t.id}"><div><strong>${escapeHtml(t.title)}</strong><div class="small muted">${escapeHtml(t.category)}${t.volume?` · Vol. ${escapeHtml(t.volume)}`:''}${t.lesson?` · ${escapeHtml(t.lesson)}`:''}</div></div><select data-status="${t.id}"><option value="not_studied" ${t.status==='not_studied'?'selected':''}>Not yet</option><option value="in_progress" ${t.status==='in_progress'?'selected':''}>In progress</option><option value="studied" ${t.status==='studied'?'selected':''}>Studied</option></select><span class="small muted">${escapeHtml(t.notes||'No notes')}</span><span class="small muted">${escapeHtml(t.source||'manual')}</span><button class="btn ghost danger" data-delete-topic="${t.id}">Remove</button></div>`).join('')}</div></section></div>`);
+  document.querySelector('#addTopic').onclick=async()=>{const title=document.querySelector('#topicTitle').value.trim();if(!title)return;const id=uid('topic');await put('topics',{id,title,category:document.querySelector('#topicCategory').value,status:'in_progress',volume:document.querySelector('#topicVolume').value.trim(),lesson:document.querySelector('#topicLesson').value.trim(),notes:document.querySelector('#topicNotes').value.trim(),source:'manual',updatedAt:nowISO()});await refresh();renderTextbook()};
+  document.querySelectorAll('[data-status]').forEach(s=>s.onchange=async()=>{const t=state.topics.find(x=>x.id===s.dataset.status);t.status=s.value;t.updatedAt=nowISO();await put('topics',t);await refresh();toast('Topic status saved.')});
+  document.querySelectorAll('[data-delete-topic]').forEach(b=>b.onclick=async()=>{if(confirm('Remove this topic from your concept record?')){await remove('topics',b.dataset.deleteTopic);await refresh();renderTextbook()}});
+}
+
+function showDataDialog(){
+  const modal=document.createElement('div');Object.assign(modal.style,{position:'fixed',inset:0,background:'rgba(0,0,0,.5)',zIndex:80,display:'grid',placeItems:'center',padding:'20px'});modal.innerHTML=`<div class="card" style="max-width:520px;width:100%;grid-column:auto"><h2>Your data</h2><p class="muted">Export a JSON backup or import one. Import replaces the current local dataset.</p><div class="row"><button class="btn primary" id="exportBtn">Export JSON</button><button class="btn" id="importBtn">Import JSON</button><button class="btn ghost" id="closeData">Close</button></div></div>`;document.body.appendChild(modal);
+  modal.querySelector('#closeData').onclick=()=>modal.remove();modal.onclick=e=>{if(e.target===modal)modal.remove()};
+  modal.querySelector('#exportBtn').onclick=async()=>{const data=await exportData();const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`polskilab-backup-${new Date().toISOString().slice(0,10)}.json`;a.click();URL.revokeObjectURL(url)};
+  modal.querySelector('#importBtn').onclick=()=>{modal.remove();document.querySelector('#importFile').click()};
+}
+async function handleImport(e){const file=e.target.files?.[0];if(!file)return;if(!confirm('Importing will replace your current local PolskiLab data. Continue?'))return;try{const data=JSON.parse(await file.text());await importData(data);await refresh();shell();toast('Backup imported.')}catch(err){alert(`Import failed: ${err.message}`)}finally{e.target.value=''}}
+
+async function init(){
+  await seed();await refresh();const theme=state.profile?.theme||'system';document.documentElement.dataset.theme=theme==='system'?'':theme;shell();
+  if('serviceWorker'in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js').catch(()=>{});
+}
+
+init().catch(err=>{document.querySelector('#app').innerHTML=`<main class="main"><div class="feedback bad"><strong>PolskiLab could not start.</strong><pre>${escapeHtml(err.stack||err.message)}</pre></div></main>`});
+
+  </script>
+</body>
+</html>
